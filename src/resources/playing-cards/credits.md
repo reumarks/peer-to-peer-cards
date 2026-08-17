@@ -1,4 +1,4 @@
-Attributions:
+## Credits
 
 Playing card designs:
-<a href="https://commons.wikimedia.org/wiki/File:Public_domain_complete_playing_card_deck.svg">AustinGabriel64</a>, CC0, via Wikimedia Commons
+<a href="https://commons.wikimedia.org/wiki/File:English_pattern_playing_cards_deck.svg">Dmitry Fomin</a>, CC0, via Wikimedia Commons
