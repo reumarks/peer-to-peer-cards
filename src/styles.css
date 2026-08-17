@@ -33,6 +33,21 @@ body {
 .highlight {
   border: 2px solid red;
 }
+.tilt-right {
+  -webkitTransform: rotate(5deg); 
+  -mozTransform: rotate(5deg); 
+  -msTransform:rotate(5deg); 
+  -oTransform: rotate(5deg); 
+  transform: rotate(5deg);
+}
+.tilt-left {
+  -webkitTransform: rotate(-5deg); 
+  -mozTransform: rotate(-5deg); 
+  -msTransform:rotate(-5deg); 
+  -oTransform: rotate(-5deg); 
+  transform: rotate(-5deg);
+}
+
 
 /*
   Room ui elements
@@ -81,5 +96,10 @@ body {
   
   user-select: none;
   -webkit-user-select: none; 
+  
+  -webkit-transition: transform 0.04s ease-in-out;
+  -moz-transition: transform 0.04s ease-in-out;
+  -o-transition: transform 0.04s ease-in-out;
+  transition: transform 0.04s ease-in-out;
 }
 

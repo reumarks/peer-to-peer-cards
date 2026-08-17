@@ -23,7 +23,7 @@ export function createDeck(x, y){
 export function createCard(cardName, x, y){
   let newCard = document.createElement('img');
   newCard.className = 'card';
-  newCard.src = `/src/resources/playing-cards/${cardName}.svg`;
+  newCard.src = `./resources/playing-cards/${cardName}.svg`;
   newCard.alt = cardName;
   newCard.style.left = x + "px";
   newCard.style.top = y + "px";
@@ -46,7 +46,10 @@ function makeElementDraggable(elmnt) {
     // Move card to top
     elmnt.style.zIndex = topIndex + 1;
     topIndex++;
-    
+
+    let tiltDirection = Math.random() > 0.5;
+    elmnt.classList.add(tiltDirection ? "tilt-right" : "tilt-left");
+        
     document.onmouseup = closeDragElement;
     document.onmousemove = elementDrag;
   }
@@ -63,6 +66,8 @@ function makeElementDraggable(elmnt) {
   }
 
   function closeDragElement() {
+    elmnt.classList.remove("tilt-right");
+    elmnt.classList.remove("tilt-left");
     document.onmouseup = null;
     document.onmousemove = null;
   }
