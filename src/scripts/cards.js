@@ -47,27 +47,22 @@ function makeElementDraggable(elmnt) {
     elmnt.style.zIndex = topIndex + 1;
     topIndex++;
     
-    // Setup stop drag function
     document.onmouseup = closeDragElement;
-    // call a function whenever the cursor moves
     document.onmousemove = elementDrag;
   }
 
   function elementDrag(e) {
     e = e || window.event;
     e.preventDefault();
-    // calculate the new cursor position:
     posX = pPosX - e.clientX;
     posY = pPosY - e.clientY;
     pPosX = e.clientX;
     pPosY = e.clientY;
-    // set the element's new position:
     elmnt.style.top = (elmnt.offsetTop - posY) + "px";
     elmnt.style.left = (elmnt.offsetLeft - posX) + "px";
   }
 
   function closeDragElement() {
-    /* stop moving when mouse button is released:*/
     document.onmouseup = null;
     document.onmousemove = null;
   }
