@@ -1,4 +1,4 @@
-import { createDeck } from "./cards.js";
+import { createDeck, moveCard } from "./cards.js";
 
 let room = null;
 
@@ -9,12 +9,19 @@ export async function initGame(currentRoom){
 
   room.on('action', (e) => {
     const { type, payload, from } = e.detail;
-    //if (type === 'mouse-click-event') makeDot(payload);
+    if (type === 'move-card-event') {
+      const {cardName, x, y} = payload;
+      moveCardEvent(cardName, x, y);
+    }
   });
 
-  createDeck(20, 20, 10);
+  createDeck(room, 20, 20, 10);
 
   draw();
+}
+
+function moveCardEvent(cardName, x, y){
+  moveCard(cardName, x, y);
 }
 
 function draw(){
