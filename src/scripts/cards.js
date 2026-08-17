@@ -82,10 +82,10 @@ function makeElementDraggable(elmnt) {
     pPosY = e.clientY;
     elmnt.style.top = (elmnt.offsetTop - posY) + "px";
     elmnt.style.left = (elmnt.offsetLeft - posX) + "px";
-    room.send('move-card-event', { cardName: elmnt.id, x: elmnt.style.left, y: elmnt.style.top });
   }
-
+  
   function closeDragElement() {
+    room.send('move-card-event', { cardName: elmnt.id, x: elmnt.style.left, y: elmnt.style.top });
     elmnt.classList.remove("tilt-right");
     elmnt.classList.remove("tilt-left");
     document.onmouseup = null;

@@ -1,4 +1,5 @@
 import { createDeck, moveCard } from "./cards.js";
+import { setupCatHand } from "./cat-hands.js";
 
 let room = null;
 
@@ -16,6 +17,7 @@ export async function initGame(currentRoom){
   });
 
   createDeck(room, 20, 20, 10);
+  setupCatHand();
 
   draw();
 }
