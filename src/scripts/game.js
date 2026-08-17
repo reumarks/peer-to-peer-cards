@@ -1,58 +1,70 @@
-import { setupCallbacks, mouse, resetInputStates } from './inputManager.js'
-
-const canvas = document.getElementById('game-canvas');
-const ctx = canvas.getContext('2d');
+const gameBoard = document.getElementById('game-container');
+const debugText = document.getElementById('debug-text')
 let room = null;
 
-function resizeCanvas(){
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-}
-window.addEventListener('resize', resizeCanvas);
+let topIndex = 10;
 
-export function initGame(currentRoom){
-  resizeCanvas();
-  setupCallbacks({canvas: canvas});
+//window.addEventListener('resize', resizeCanvas);
 
+export async function initGame(currentRoom){
   room = currentRoom;
 
   room.on('action', (e) => {
     const { type, payload, from } = e.detail;
-    if (type === 'mouse-click-event') makeDot(payload);
+    //if (type === 'mouse-click-event') makeDot(payload);
   });
+
+  // Register all cards as draggable elements
+  let cards = document.getElementsByClassName("card");
+  for(let cardIndex = 0; cardIndex < cards.length; cardIndex++){
+    dragElement(cards[cardIndex]);
+  }
 
   draw();
 }
 
-let dots = [];
+// drag element loosely based on https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_draggable
+function dragElement(elmnt) {
+  var pPosX = 0, pPosY = 0, posX = 0, posY = 0;
+  elmnt.onmousedown = dragMouseDown;
 
-function makeDot(dotPos){
-  dots.push(dotPos);
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    pPosX = e.clientX;
+    pPosY = e.clientY;
+
+    // Move card to top
+    elmnt.style.zIndex = topIndex + 1;
+    topIndex++;
+    
+    // Setup stop drag function
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    posX = pPosX - e.clientX;
+    posY = pPosY - e.clientY;
+    pPosX = e.clientX;
+    pPosY = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - posY) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - posX) + "px";
+  }
+
+  function closeDragElement() {
+    /* stop moving when mouse button is released:*/
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
 }
 
 function draw(){
-  ctx.fillStyle = '#0e1013';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = '#eceef1';
-  ctx.font = '16px sans-serif';
-  ctx.textAlign = 'center';
-  
-  if(mouse.wasReleased){
-    room.send('mouse-click-event', { x: mouse.x, y: mouse.y });
-  }
-  
-  ctx.fillStyle = '#ff0000'
-  ctx.beginPath();
-  ctx.ellipse(mouse.x, mouse.y, 50, 50, Math.PI / 4, 0, 2 * Math.PI);
-  ctx.fill();
 
-  for(let i = 0; i < dots.length; i++){
-    ctx.fillStyle = '#ff0000'
-    ctx.beginPath();
-    ctx.ellipse(dots[i].x, dots[i].y, 20, 20, Math.PI / 4, 0, 2 * Math.PI);
-    ctx.fill();
-  }
-
-  resetInputStates();
   requestAnimationFrame(draw);
 }

@@ -21,19 +21,22 @@ body {
   justify-content: center;
 }
 
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
 .hidden {
   display: none !important;
 }
-
-#game-canvas {
-  background: var(--bg);
-  display: block;
-  position: fixed;
-  inset: 0;
-  width: 100vw;
-  height: 100vh;
+.highlight {
+  border: 2px solid red;
 }
 
+/*
+  Room ui elements
+*/
 #room-ui {
   position: fixed;
   top: 12px;
@@ -65,3 +68,18 @@ body {
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
+
+/*
+  Game play css
+*/
+.card {
+  position: absolute;
+  text-align: center;
+  width: 100px;
+  height: auto;
+  z-index: 10;
+  
+  user-select: none;
+  -webkit-user-select: none; 
+}
+

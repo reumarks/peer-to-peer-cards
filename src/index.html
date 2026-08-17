@@ -7,13 +7,15 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <canvas id="game-canvas"></canvas>
+  <img class="card" src="/src/resources/playing-cards/jack-of-diamonds.svg" alt="card" />
+  <img class="card" src="/src/resources/playing-cards/queen-of-diamonds.svg" alt="card" />
+  <img class="card" src="/src/resources/playing-cards/2-of-hearts.svg" alt="card" />
 
   <div id="room-ui" hidden>
     <span id="room-host-badge" hidden>Host</span>
     <button id="room-copy-btn" type="button">Copy invite link</button>
+    <p id="debug-text"></p>
   </div>
-
 
   <script src="https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js"></script>
   <script type="module" src="scripts/main.js"></script>

@@ -11,4 +11,4 @@ room.on('hostchange', (e) => {
 room.on('peerjoined', (e) => console.log('peer joined', e.detail.peerId));
 room.on('peerleft', (e) => console.log('peer left', e.detail.peerId));
 
-initGame(room);
+await initGame(room);
