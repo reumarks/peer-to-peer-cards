@@ -92,9 +92,9 @@ export class RoomSync extends EventTarget {
     this.dispatchEvent(new CustomEvent('action', { detail: msg }));
   }
 
-  broadcast(msg) {
+  broadcast(msg, excludePeerId) {
     for (const [id, conn] of this.connections) {
-      if (conn.open) conn.send(msg);
+      if (id !== excludePeerId && conn.open) conn.send(msg);
     }
   }
 
@@ -185,7 +185,7 @@ export class RoomSync extends EventTarget {
       });
       conn.on('data', (data) => {
         this.handleIncoming(data);
-        this.broadcast(data);
+        this.broadcast(data, conn.peer);
       });
       conn.on('close', () => {
         this.connections.delete(conn.peer);

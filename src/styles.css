@@ -91,7 +91,7 @@ body {
   position: absolute;
   text-align: center;
   width: 100px;
-  height: auto;
+  aspect-ratio: 5/7;
   z-index: 10;
   
   user-select: none;

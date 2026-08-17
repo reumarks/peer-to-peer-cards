@@ -44,6 +44,7 @@ export function moveCard(cardName, x, y){
     console.log(`No card ${cardName} found.`);
     return;
   }
+  console.log("got message")
   
   currentCard.style.left = x;
   currentCard.style.top = y;
