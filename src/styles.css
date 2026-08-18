@@ -11,7 +11,6 @@ html,
 body {
   height: 100%;
   margin: 0;
-  cursor: none;
 }
 
 body {
@@ -31,9 +30,15 @@ body {
 .hidden {
   display: none !important;
 }
+
 .highlight {
   border: 2px solid red;
 }
+
+.no-cursor {
+  cursor: none;
+}
+
 .tilt-right {
   -webkitTransform: rotate(5deg); 
   -mozTransform: rotate(5deg); 
@@ -112,6 +117,11 @@ body {
   -msTransform: translate(-75px, -75px); 
   -oTransform: translate(-75px, -75px); 
   transform: translate(-75px, -75px); 
+
+  -webkit-transition: transform 1s ease-in-out;
+  -moz-transition: transform 1s ease-in-out;
+  -o-transition: transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
 }
 
 /*
