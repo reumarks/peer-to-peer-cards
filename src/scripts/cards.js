@@ -1,4 +1,4 @@
-import { mouse, hand, makeElementDraggable } from "./input-manager.js";
+import { mouse, paw, makeElementDraggable } from "./input-manager.js";
 import { boardState } from "./scene-elements.js";
 
 let room = null;

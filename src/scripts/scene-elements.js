@@ -6,9 +6,6 @@ export function setupSceneElements(){
 
 }
 
-export function hideCursor(){
-}
-
 export function showCursor(show){
     if(show){
         document.body.classList.add('no-cursor');

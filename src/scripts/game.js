@@ -1,13 +1,12 @@
 import { createDeck, moveCard } from "./cards.js";
-import { mouse, hand, refreshInputStates, setupInputManager } from "./input-manager.js";
-import { hideCursor, setupSceneElements, showCursor } from "./scene-elements.js";
+import { mouse, paw, refreshInputStates, setupInputManager } from "./input-manager.js";
+import { setupSceneElements, showCursor } from "./scene-elements.js";
 
 let room = null;
 
 let topIndex = 10;
 
 const myArm = document.getElementById('my-arm');
-
 
 export async function initGame(currentRoom){
   room = currentRoom;
@@ -33,29 +32,29 @@ function moveCardEvent(cardName, x, y){
 }
 
 function updateCatArm(){
-  if(mouse.y < window.innerHeight/2 - 200 && hand.held.element === null){
-    hand.y = (hand.y * 0.95 + (window.innerHeight - 50) * 0.05);
-    hand.x = (hand.x * 0.7 + mouse.x * 0.3);
-    hand.onMouse = false;
+  if(mouse.y < window.innerHeight/2 - 200 && paw.held.element === null){
+    paw.y = (paw.y * 0.95 + (window.innerHeight - 50) * 0.05);
+    paw.x = (paw.x * 0.7 + mouse.x * 0.3);
+    paw.onMouse = false;
   }else if(mouse.y < window.innerHeight/2) {
-    hand.y = (Math.max(hand.y, window.innerHeight/2) * 0.7 + (window.innerHeight / 2) * 0.3);
-    hand.x = (hand.x * 0.7 + mouse.x * 0.3);
-    hand.onMouse = false;
+    paw.y = (Math.max(paw.y, window.innerHeight/2) * 0.7 + (window.innerHeight / 2) * 0.3);
+    paw.x = (paw.x * 0.7 + mouse.x * 0.3);
+    paw.onMouse = false;
   }else if(mouse.y > window.innerHeight / 2){
-    if(Math.abs(mouse.x - hand.x) < 10 && Math.abs(mouse.y - hand.y) < 10){
-      hand.onMouse = true;
-      hand.y = mouse.y;
-      hand.x = mouse.x;
+    if(Math.abs(mouse.x - paw.x) < 10 && Math.abs(mouse.y - paw.y) < 10){
+      paw.onMouse = true;
+      paw.y = mouse.y;
+      paw.x = mouse.x;
     }else{
-      hand.x = (hand.x * 0.7 + mouse.x * 0.3);
-      hand.y = (hand.y * 0.7 + mouse.y * 0.3);
+      paw.x = (paw.x * 0.7 + mouse.x * 0.3);
+      paw.y = (paw.y * 0.7 + mouse.y * 0.3);
     }
   }
 
-  if(!hand.onMouse){
-    if(hand.held.element !== null){
-        hand.held.element.style.left = (hand.held.offset.x + hand.x) + "px";
-        hand.held.element.style.top = (hand.held.offset.y + hand.y) + "px";
+  if(!paw.onMouse){
+    if(paw.held.element !== null){
+        paw.held.element.style.left = (paw.held.offset.x + paw.x) + "px";
+        paw.held.element.style.top = (paw.held.offset.y + paw.y) + "px";
     }
   }
 
@@ -65,10 +64,10 @@ function updateCatArm(){
     myArm.src = './resources/cat-arms/orange_open.svg';
   }
 
-  myArm.style.left = hand.x + "px";
-  myArm.style.top = hand.y + "px";
+  myArm.style.left = paw.x + "px";
+  myArm.style.top = paw.y + "px";
   
-  showCursor(hand.onMouse);
+  showCursor(paw.onMouse);
 }
 
 function draw(){

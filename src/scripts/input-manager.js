@@ -8,7 +8,7 @@ export const mouse = {
     isPressed: false,
 };
 
-export const hand = {
+export const paw = {
     x: -200,
     y: 4000,
     px: 0,
@@ -30,12 +30,12 @@ export function setupInputManager(){
         e = e || window.event;
         mouse.x = e.clientX;
         mouse.y = e.clientY;
-        if(hand.onMouse){
-            hand.x = mouse.x;
-            hand.y = mouse.y;
-            if(hand.held.element !== null){
-                hand.held.element.style.left = (hand.held.offset.x + hand.x) + "px";
-                hand.held.element.style.top = (hand.held.offset.y + hand.y) + "px";
+        if(paw.onMouse){
+            paw.x = mouse.x;
+            paw.y = mouse.y;
+            if(paw.held.element !== null){
+                paw.held.element.style.left = (paw.held.offset.x + paw.x) + "px";
+                paw.held.element.style.top = (paw.held.offset.y + paw.y) + "px";
             }
         }
     }
@@ -63,18 +63,18 @@ export function makeElementDraggable(elmnt, onDown, onUp) {
     e = e || window.event;
     e.preventDefault();
 
-    if(hand.held.element !== null){
+    if(paw.held.element !== null){
       return;
     }
 
-    if(!hand.onMouse){
+    if(!paw.onMouse){
       return;
     }
 
-    hand.held.element = elmnt;
-    hand.held.offset = {
-      x: elmnt.offsetLeft - hand.x,
-      y: elmnt.offsetTop - hand.y,
+    paw.held.element = elmnt;
+    paw.held.offset = {
+      x: elmnt.offsetLeft - paw.x,
+      y: elmnt.offsetTop - paw.y,
     }
       
     elmnt.style.zIndex = boardState.topIndex + 1;
@@ -94,7 +94,7 @@ export function makeElementDraggable(elmnt, onDown, onUp) {
       onUp(elmnt); 
     }
 
-    hand.held.element = null;
+    paw.held.element = null;
     document.onmouseup = null;
   }
 }
