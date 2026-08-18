@@ -9,8 +9,8 @@ export const mouse = {
 };
 
 export const hand = {
-    x: 0,
-    y: 0,
+    x: -200,
+    y: 4000,
     px: 0,
     py: 0,
     onMouse: false,
@@ -24,6 +24,8 @@ export const hand = {
 };
 
 export function setupInputManager(){
+    mouse.x = window.event.clientX;
+    mouse.y = window.event.clientY;
     window.onmousemove = (e) => {
         e = e || window.event;
         mouse.x = e.clientX;

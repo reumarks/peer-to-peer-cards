@@ -24,7 +24,7 @@ export async function initGame(currentRoom){
     }
   });
 
-  createDeck(room, 20, window.innerHeight * 3/4, 10);
+  createDeck(room, 20, window.innerHeight * 3/5, 10);
   draw();
 }
 
@@ -33,18 +33,21 @@ function moveCardEvent(cardName, x, y){
 }
 
 function updateCatArm(){
-  hand.x = mouse.x;
   if(mouse.y < window.innerHeight/2 - 200 && hand.held.element === null){
     hand.y = (hand.y * 0.95 + (window.innerHeight - 50) * 0.05);
+    hand.x = (hand.x * 0.7 + mouse.x * 0.3);
     hand.onMouse = false;
   }else if(mouse.y < window.innerHeight/2) {
     hand.y = (Math.max(hand.y, window.innerHeight/2) * 0.7 + (window.innerHeight / 2) * 0.3);
+    hand.x = (hand.x * 0.7 + mouse.x * 0.3);
     hand.onMouse = false;
   }else if(mouse.y > window.innerHeight / 2){
     if(Math.abs(mouse.x - hand.x) < 10 && Math.abs(mouse.y - hand.y) < 10){
       hand.onMouse = true;
       hand.y = mouse.y;
+      hand.x = mouse.x;
     }else{
+      hand.x = (hand.x * 0.7 + mouse.x * 0.3);
       hand.y = (hand.y * 0.7 + mouse.y * 0.3);
     }
   }
