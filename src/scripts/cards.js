@@ -1,7 +1,8 @@
+import { mouse, hand, makeElementDraggable } from "./input-manager.js";
+import { boardState } from "./scene-elements.js";
+
 let room = null;
 const cardParent = document.body;
-
-let topIndex = 10;
 
 export const cardValues = ["ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king"];
 export const cardSuits = ["clubs", "diamonds", "hearts", "spades"];
@@ -32,9 +33,20 @@ export function createCard(cardName, x, y){
   newCard.alt = cardName;
   newCard.style.left = x + "px";
   newCard.style.top = y + "px";
-  newCard.style.zIndex = topIndex + 1;
-  topIndex ++;
-  makeElementDraggable(newCard);
+  newCard.style.zIndex = boardState.topIndex + 1;
+  boardState.topIndex ++;
+  makeElementDraggable(
+    newCard, 
+    (elmnt) =>{
+      let tiltDirection = Math.random() > 0.5;
+      elmnt.classList.add(tiltDirection ? "tilt-right" : "tilt-left");
+    },
+    (elmnt) => {
+      room.send('move-card-event', { cardName: elmnt.id, x: elmnt.style.left, y: elmnt.style.top });
+      elmnt.classList.remove("tilt-right");
+      elmnt.classList.remove("tilt-left");
+    }
+  );
   cardParent.appendChild(newCard);
 }
 
@@ -44,51 +56,9 @@ export function moveCard(cardName, x, y){
     console.log(`No card ${cardName} found.`);
     return;
   }
-  console.log("got message")
   
   currentCard.style.left = x;
   currentCard.style.top = y;
-  currentCard.style.zIndex = topIndex + 1;
-  topIndex++;
-}
-
-function makeElementDraggable(elmnt) {
-  let pPosX = 0, pPosY = 0, posX = 0, posY = 0;
-  elmnt.onmousedown = dragMouseDown;
-
-  function dragMouseDown(e) {
-    e = e || window.event;
-    e.preventDefault();
-    pPosX = e.clientX;
-    pPosY = e.clientY;
-
-    // Move card to top
-    elmnt.style.zIndex = topIndex + 1;
-    topIndex++;
-
-    let tiltDirection = Math.random() > 0.5;
-    elmnt.classList.add(tiltDirection ? "tilt-right" : "tilt-left");
-        
-    document.onmouseup = closeDragElement;
-    document.onmousemove = elementDrag;
-  }
-
-  function elementDrag(e) {
-    e = e || window.event;
-    e.preventDefault();
-    posX = pPosX - e.clientX;
-    posY = pPosY - e.clientY;
-    pPosX = e.clientX;
-    pPosY = e.clientY;
-    elmnt.style.top = (elmnt.offsetTop - posY) + "px";
-    elmnt.style.left = (elmnt.offsetLeft - posX) + "px";
-  }
-  
-  function closeDragElement() {
-    room.send('move-card-event', { cardName: elmnt.id, x: elmnt.style.left, y: elmnt.style.top });
-    elmnt.classList.remove("tilt-right");
-    elmnt.classList.remove("tilt-left");
-    document.onmouseup = null;
-    document.onmousemove = null;
-  }
+  currentCard.style.zIndex = boardState.topIndex + 1;
+  boardState.topIndex++;
 }
