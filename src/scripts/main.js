@@ -11,4 +11,13 @@ room.on('hostchange', (e) => {
 room.on('peerjoined', (e) => console.log('peer joined', e.detail.peerId));
 room.on('peerleft', (e) => console.log('peer left', e.detail.peerId));
 
-await initGame(room);
+room.on('roomfull', () => {
+  //alert('This room is full (4/4 players). Try a different room code.');
+});
+
+if (room.playerNumber == null) {
+  console.warn('Could not join the room');
+} else {
+  console.log(`You are player ${room.playerNumber} of ${room.playerCount}`);
+  await initGame(room);
+}

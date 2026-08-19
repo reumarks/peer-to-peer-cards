@@ -23,3 +23,37 @@ export function showCursor(show){
         document.body.classList.remove('no-cursor');
     }
 }
+
+export function convertToWorldCords(playerNumber, x, y, r){
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    switch(playerNumber){
+        case 1:
+            return {x: x - centerX, y: y - centerY, r: r};
+        case 2:
+            return {x: -(x - centerX), y: -(y - centerY), r: r};
+        case 3: 
+            return {x: x - centerX, y: y - centerY, r: r};
+        case 4:
+            return {x: x - centerX, y: y - centerY, r: r};
+        default:
+            return {x: x - centerX, y: y - centerY, r: r};
+    }
+}
+
+export function convertToPlayerCords(playerNumber, x, y, r){
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+    switch(playerNumber){
+        case 1:
+            return {x: x + centerX, y: y + centerY, r: r};
+        case 2:
+            return {x: -(x - centerX), y: -(y - centerY), r: r};
+        case 3: 
+            return {x: x - centerX, y: y - centerY, r: r};
+        case 4:
+            return {x: x - centerX, y: y - centerY, r: r};
+        default:
+            return {x: x - centerX, y: y - centerY, r: r};
+    }
+}

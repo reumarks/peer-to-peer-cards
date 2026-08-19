@@ -14,8 +14,8 @@ export function createDeck(currentRoom, x, y){
     for(let valueIndex = 0; valueIndex < cardValues.length; valueIndex++){
       createCard(
         `${cardValues[valueIndex]}-of-${cardSuits[suitIndex]}`, 
-        x + currentIndex * 15, 
-        y
+        x, 
+        y,
       );
       currentIndex++;
     }
@@ -42,7 +42,8 @@ export function createCard(cardName, x, y){
       elmnt.classList.add(tiltDirection ? "tilt-right" : "tilt-left");
     },
     (elmnt) => {
-      room.send('move-card-event', { cardName: elmnt.id, x: elmnt.style.left, y: elmnt.style.top });
+      const cardPosition = convertToWorldCords(room.playerNumber, elmnt.style.left, elmnt.style.top, 0);
+      room.send('move-card-event', { cardName: elmnt.id, x: cardPosition.x, y: cardPosition.y });
       elmnt.classList.remove("tilt-right");
       elmnt.classList.remove("tilt-left");
     }

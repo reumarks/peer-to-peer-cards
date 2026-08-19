@@ -28,7 +28,8 @@ export async function initGame(currentRoom){
 }
 
 function moveCardEvent(cardName, x, y){
-  moveCard(cardName, x, y);
+  const cardPosition = convertToPlayerCords(room.playerNumber, x, y, 0);
+  moveCard(cardName, cardPosition.x, cardPosition.y);
 }
 
 function updateCardsInHand(){
