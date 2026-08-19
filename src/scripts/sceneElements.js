@@ -33,7 +33,7 @@ export const paw = {
         gameObject.x = gameObjectAbsolutePos.left + gameObjectAbsolutePos.width/2 - this.x;
         gameObject.y = gameObjectAbsolutePos.top + gameObjectAbsolutePos.height/2 - this.y;
         gameObject.r = gameObject.r + ((Math.random() > 0.5) ? -5 : 5);
-        gameObject.updateDomPosition();
+        gameObject.updateDomPosition(1);
 
         this.element.appendChild(gameObject.element);
         this._held = gameObject;

@@ -17,6 +17,7 @@ export class GameObject {
         this.width = width;
         this.height = height;
         this.isDraggable = isDraggable;
+        this.zIndex = ++topIndex;
         this.element = this.createDomElement();
     }
 
@@ -30,7 +31,7 @@ export class GameObject {
         this.element.style.transform = `rotate(${this.r}deg)`
         this.element.style.width = this.width + "px";
         this.element.style.height = this.height + "px";
-        this.element.style.zIndex = ++topIndex;
+        this.element.style.zIndex = this.zIndex;
         
         if(this.isDraggable){
             this.element.onmousedown = (e) => this.mouseDown(e);
@@ -40,11 +41,12 @@ export class GameObject {
         return this.element;
     }
 
-    updateDomPosition(){
+    updateDomPosition(zIndexOverride){
         this.element.style.left = this.x - this.width/2 + "px";
         this.element.style.top = this.y - this.height/2 + "px";
+        this.zIndex = zIndexOverride ? zIndexOverride : ++topIndex
+        this.element.style.zIndex = this.zIndex;
         this.element.style.transform = `rotate(${this.r}deg)`
-        this.element.style.zIndex = ++topIndex;
     }
 
     mouseDown(e){
