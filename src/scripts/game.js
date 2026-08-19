@@ -1,6 +1,6 @@
 import { createDeck, moveCard } from "./cards.js";
 import { mouse, paw, refreshInputStates, setupInputManager } from "./input-manager.js";
-import { setupSceneElements, showCursor } from "./scene-elements.js";
+import { hand, setupSceneElements, showCursor } from "./scene-elements.js";
 
 let room = null;
 
@@ -31,6 +31,25 @@ function moveCardEvent(cardName, x, y){
   moveCard(cardName, x, y);
 }
 
+function updateCardsInHand(){
+  for(let handIndex = 0; handIndex < hand.items.length; handIndex++){
+    if(hand.items[handIndex] === null){
+      continue;
+    }
+    const cardX = parseFloat(hand.items[handIndex].style.left);
+    const cardY = parseFloat(hand.items[handIndex].style.top);
+    const cardWidth = 100;
+    const aspectRatio = 5/7;
+    const padding = 20;
+    const boundCenterX = (hand.bounds.left + hand.bounds.right) / 2;
+    const boundCenterY = (hand.bounds.top + hand.bounds.bottom) / 2;
+    const indexedPosition = (boundCenterX - ((cardWidth + padding) * (hand.items.length - 1) + cardWidth)/2) + (cardWidth + padding) * handIndex;
+
+    hand.items[handIndex].style.left = (cardX * 0.6 + indexedPosition * 0.4) + "px";
+    hand.items[handIndex].style.top = (cardY * 0.6 + (boundCenterY - (cardWidth / aspectRatio) / 2) * 0.4) + "px";
+  }
+}
+
 function updateCatArm(){
   if(mouse.y < window.innerHeight/2 - 200 && paw.held.element === null){
     paw.y = (paw.y * 0.95 + (window.innerHeight - 50) * 0.05);
@@ -51,11 +70,11 @@ function updateCatArm(){
     }
   }
 
-  if(!paw.onMouse){
-    if(paw.held.element !== null){
-        paw.held.element.style.left = (paw.held.offset.x + paw.x) + "px";
-        paw.held.element.style.top = (paw.held.offset.y + paw.y) + "px";
-    }
+  if(!paw.onMouse && paw.held.element !== null){
+    paw.held.x = paw.held.offset.x + paw.x;
+    paw.held.y = paw.held.offset.y + paw.y;
+    paw.held.element.style.left = paw.held.x + "px";
+    paw.held.element.style.top = paw.held.y + "px";
   }
 
   if (mouse.wasPressed) {
@@ -72,6 +91,8 @@ function updateCatArm(){
 
 function draw(){
   updateCatArm();
+  updateCardsInHand();
+
 
   refreshInputStates();
   requestAnimationFrame(draw);

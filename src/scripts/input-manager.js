@@ -1,4 +1,4 @@
-import { boardState } from "./scene-elements.js";
+import { boardState, hand } from "./scene-elements.js";
 
 export const mouse = {
     x: 0,
@@ -11,10 +11,10 @@ export const mouse = {
 export const paw = {
     x: -200,
     y: 4000,
-    px: 0,
-    py: 0,
     onMouse: false,
     held: {
+        x: 0,
+        y: 0,
         element: null,
         offset: {
             x: 0,
@@ -34,8 +34,10 @@ export function setupInputManager(){
             paw.x = mouse.x;
             paw.y = mouse.y;
             if(paw.held.element !== null){
-                paw.held.element.style.left = (paw.held.offset.x + paw.x) + "px";
-                paw.held.element.style.top = (paw.held.offset.y + paw.y) + "px";
+                paw.held.x = paw.held.offset.x + paw.x;
+                paw.held.y = paw.held.offset.y + paw.y;
+                paw.held.element.style.left = paw.held.x + "px";
+                paw.held.element.style.top = paw.held.y + "px";
             }
         }
     }
@@ -78,6 +80,14 @@ export function makeElementDraggable(elmnt, onDown, onUp) {
     }
       
     elmnt.style.zIndex = boardState.topIndex + 1;
+    
+    for(let handIndex = 0; handIndex < hand.items.length; handIndex++){
+        if(hand.items[handIndex] === elmnt){
+            hand.items.splice(handIndex, 1);
+            handIndex --;
+        }
+    }
+    
     boardState.topIndex++;
 
     // Run callback method
@@ -92,6 +102,23 @@ export function makeElementDraggable(elmnt, onDown, onUp) {
     // Run callback method
     if(onUp !== null){
       onUp(elmnt); 
+    }
+
+    const cardWidth = 100;
+    const aspectRatio = 5/7;
+    if((paw.x + paw.held.offset.x + cardWidth > hand.bounds.left) && 
+       (paw.y + paw.held.offset.y  + cardWidth/aspectRatio > hand.bounds.top) &&
+       (paw.x + paw.held.offset.x < hand.bounds.right && paw.y + paw.held.offset.y < hand.bounds.bottom)){
+        let newHandIndex = hand.items.length;
+        for(let handIndex = 0; handIndex < hand.items.length; handIndex++){
+            const cardWidth = 100;
+            const cardX = parseFloat(hand.items[handIndex].style.left);
+            if(paw.x + paw.held.offset.x < cardX){
+                newHandIndex = handIndex;
+                break;
+            }
+        }
+        hand.items.splice(newHandIndex, 0, elmnt);
     }
 
     paw.held.element = null;
