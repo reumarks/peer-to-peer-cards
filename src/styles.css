@@ -40,22 +40,6 @@ body {
   cursor: none;
 }
 
-.tilt-right {
-  -webkitTransform: rotate(5deg); 
-  -mozTransform: rotate(5deg); 
-  -msTransform:rotate(5deg); 
-  -oTransform: rotate(5deg); 
-  transform: rotate(5deg);
-}
-.tilt-left {
-  -webkitTransform: rotate(-5deg); 
-  -mozTransform: rotate(-5deg); 
-  -msTransform:rotate(-5deg); 
-  -oTransform: rotate(-5deg); 
-  transform: rotate(-5deg);
-}
-
-
 /*
   Room ui elements
 */
@@ -102,11 +86,24 @@ body {
   right:0px;
   bottom: 0px;
 }
+
+#my-arm-wrapper {
+  position: relative;
+  top: 20000px;
+  left: 200px;
+  z-index: 101;
+
+  user-select: none;
+  -webkit-user-select: none; 
+  pointer-events: none;
+
+}
+
 .cat-arm {
   overflow: hidden;
   position: absolute;
-  top: 20000px;
-  left: 200px;
+  top: 0px;
+  left: 0px;
   z-index: 101;
 
   user-select: none;
@@ -118,11 +115,6 @@ body {
   -msTransform: translate(-75px, -25px); 
   -oTransform: translate(-75px, -25px); 
   transform: translate(-75px, -25px); 
-
-  -webkit-transition: transform 1s ease-in-out;
-  -moz-transition: transform 1s ease-in-out;
-  -o-transition: transform 1s ease-in-out;
-  transition: transform 1s ease-in-out;
 }
 
 /*
