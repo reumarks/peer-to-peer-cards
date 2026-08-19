@@ -1,8 +1,8 @@
-import { RoomSync } from './room-sync.js';
+import { RoomSync } from './roomSync.js';
 import { initGame } from './game.js';
 
 const room = new RoomSync();
-await room.start();
+//await room.start();
 
 room.on('hostchange', (e) => {
   // e.detail.isHost tells if this client is now the host
@@ -19,5 +19,5 @@ if (room.playerNumber == null) {
   console.warn('Could not join the room');
 } else {
   console.log(`You are player ${room.playerNumber} of ${room.playerCount}`);
-  await initGame(room);
 }
+await initGame(room);

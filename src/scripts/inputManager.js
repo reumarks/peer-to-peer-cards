@@ -1,4 +1,4 @@
-import { boardState, hand } from "./scene-elements.js";
+import { boardState, hand } from "./sceneElements.js";
 
 export const mouse = {
     x: 0,
@@ -24,8 +24,8 @@ export const paw = {
 };
 
 export function setupInputManager(){
-    mouse.x = window.event.clientX;
-    mouse.y = window.event.clientY;
+    //mouse.x = window.event.clientX;
+    //mouse.y = window.event.clientY;
     window.onmousemove = (e) => {
         e = e || window.event;
         mouse.x = e.clientX;
@@ -72,6 +72,8 @@ export function makeElementDraggable(elmnt, onDown, onUp) {
     e = e || window.event;
     e.preventDefault();
 
+    console.log("eeeee");
+
     if(paw.held.element !== null){
       return;
     }
@@ -109,7 +111,7 @@ export function makeElementDraggable(elmnt, onDown, onUp) {
     if((paw.x + paw.held.offset.x + cardWidth > hand.bounds.left) && 
        (paw.y + paw.held.offset.y  + cardWidth/aspectRatio > hand.bounds.top) &&
        (paw.x + paw.held.offset.x < hand.bounds.right && paw.y + paw.held.offset.y < hand.bounds.bottom)){
-        
+
         let cardAlreadyInHand = false;
         for(let handIndex = 0; handIndex < hand.items.length; handIndex++){
             if(hand.items[handIndex] === paw.held.element){

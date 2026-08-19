@@ -1,6 +1,6 @@
 import { createDeck, moveCard } from "./cards.js";
-import { mouse, paw, refreshInputStates, setupInputManager } from "./input-manager.js";
-import { convertToPlayerCords, hand, setupSceneElements, showCursor } from "./scene-elements.js";
+import { mouse, paw, refreshInputStates, setupInputManager } from "./inputManager.js";
+import { convertToPlayerCords, hand, setupSceneElements, showCursor } from "./sceneElements.js";
 
 let room = null;
 
@@ -23,7 +23,7 @@ export async function initGame(currentRoom){
     }
   });
 
-  createDeck(room, 20, window.innerHeight * 3/5, 10);
+  createDeck(room, 0, 0);
   draw();
 }
 

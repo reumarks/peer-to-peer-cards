@@ -1,8 +1,9 @@
-import { mouse, paw, makeElementDraggable } from "./input-manager.js";
-import { boardState, convertToWorldCords } from "./scene-elements.js";
+import { gameObject } from "./gameObjects.js";
+import { mouse, paw, makeElementDraggable } from "./inputManager.js";
+import { boardState, convertToWorldCords } from "./sceneElements.js";
 
 let room = null;
-const cardParent = document.body;
+const cardParent = document.getElementById("game-table");
 
 export const cardValues = ["ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king"];
 export const cardSuits = ["clubs", "diamonds", "hearts", "spades"];
@@ -23,9 +24,8 @@ export function createDeck(currentRoom, x, y){
 }
 
 export function createCard(cardName, x, y){
-  if(document.getElementById(cardName)){
-    return;
-  }
+  //let newCard = new gameObject('card', '')
+
   let newCard = document.createElement('img');
   newCard.id = cardName;
   newCard.className = 'card';
