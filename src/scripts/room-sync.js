@@ -128,6 +128,7 @@ export class RoomSync extends EventTarget {
 
   becomeHost(code) {
     return new Promise((resolve) => {
+      if (this.peer) this.peer.destroy();
       const peer = new Peer(this.peerId(code));
       this.peer = peer;
 
@@ -141,8 +142,8 @@ export class RoomSync extends EventTarget {
       });
 
       peer.on('error', (err) => {
+        peer.destroy();
         if (err.type === 'unavailable-id') {
-          peer.destroy();
           this.joinAsClient(code)
             .then(resolve)
             .catch((joinErr) => {
@@ -163,6 +164,7 @@ export class RoomSync extends EventTarget {
 
   joinAsClient(code, timeout = 6000) {
     return new Promise((resolve, reject) => {
+      if (this.peer) this.peer.destroy();
       const peer = new Peer();
       this.peer = peer;
       let settled = false;
@@ -196,22 +198,28 @@ export class RoomSync extends EventTarget {
           } else if (msg && msg.type === '__room-full') {
             finish(() => {
               conn.close();
+              peer.destroy();
               reject(new Error('Room full'));
             });
           }
         });
 
         conn.on('error', () => {
-          finish(() => reject(new Error('Connection to host failed')));
+          finish(() => {
+            peer.destroy();
+            reject(new Error('Connection to host failed'));
+          });
         });
       });
 
       peer.on('error', (err) => {
-        finish(() => reject(err));
+        finish(() => {
+          peer.destroy();
+          reject(err);
+        });
       });
     });
   }
-
   nextAvailableNumber() {
     const taken = new Set([this.playerNumber, ...this.playerNumbers.values()]);
     for (let n = 1; n <= MAX_PLAYERS; n++) {

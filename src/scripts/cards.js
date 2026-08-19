@@ -1,5 +1,5 @@
 import { mouse, paw, makeElementDraggable } from "./input-manager.js";
-import { boardState } from "./scene-elements.js";
+import { boardState, convertToWorldCords } from "./scene-elements.js";
 
 let room = null;
 const cardParent = document.body;
@@ -42,7 +42,8 @@ export function createCard(cardName, x, y){
       elmnt.classList.add(tiltDirection ? "tilt-right" : "tilt-left");
     },
     (elmnt) => {
-      const cardPosition = convertToWorldCords(room.playerNumber, elmnt.style.left, elmnt.style.top, 0);
+      const cardPosition = convertToWorldCords(room.playerNumber, parseInt(elmnt.style.left), parseInt(elmnt.style.top), 0);
+      console.log(`Got local position ${parseInt(elmnt.style.left)}, ${parseInt(elmnt.style.top)}, converted it to global position ${cardPosition.x}, ${cardPosition.y}`)
       room.send('move-card-event', { cardName: elmnt.id, x: cardPosition.x, y: cardPosition.y });
       elmnt.classList.remove("tilt-right");
       elmnt.classList.remove("tilt-left");
@@ -58,8 +59,8 @@ export function moveCard(cardName, x, y){
     return;
   }
   
-  currentCard.style.left = x;
-  currentCard.style.top = y;
+  currentCard.style.left = x + "px";
+  currentCard.style.top = y + "px";
   currentCard.style.zIndex = boardState.topIndex + 1;
   boardState.topIndex++;
 }

@@ -1,6 +1,6 @@
 import { createDeck, moveCard } from "./cards.js";
 import { mouse, paw, refreshInputStates, setupInputManager } from "./input-manager.js";
-import { hand, setupSceneElements, showCursor } from "./scene-elements.js";
+import { convertToPlayerCords, hand, setupSceneElements, showCursor } from "./scene-elements.js";
 
 let room = null;
 
@@ -28,7 +28,8 @@ export async function initGame(currentRoom){
 }
 
 function moveCardEvent(cardName, x, y){
-  const cardPosition = convertToPlayerCords(room.playerNumber, x, y, 0);
+  const cardPosition = convertToPlayerCords(room.playerNumber, parseInt(x), parseInt(y), 0);
+  console.log(`Got global position ${parseInt(x)}, ${parseInt(y)}, converted it to local ${cardPosition.x}, ${cardPosition.y}`)
   moveCard(cardName, cardPosition.x, cardPosition.y);
 }
 
