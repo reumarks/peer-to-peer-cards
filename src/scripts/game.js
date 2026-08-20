@@ -85,8 +85,7 @@ function updateCatArm() {
 function draw() {
     updateCatArm();
     //updateCardsInHand();
-
-
+    
     refreshInputStates();
     requestAnimationFrame(draw);
 }
