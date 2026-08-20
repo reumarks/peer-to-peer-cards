@@ -1,150 +1,152 @@
 :root {
-  --bg: #141519;
-  --text: #eaecf0;
+    --bg: #141519;
+    --text: #eaecf0;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 html,
 body {
-  height: 100%;
-  margin: 0;
+    height: 100%;
+    margin: 0;
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
+    background: var(--bg);
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .prevent-select {
-  -webkit-user-select: none; /* Safari */
-  -ms-user-select: none; /* IE 10 and IE 11 */
-  user-select: none; /* Standard syntax */
+    -webkit-user-select: none;
+    /* Safari */
+    -ms-user-select: none;
+    /* IE 10 and IE 11 */
+    user-select: none;
+    /* Standard syntax */
 }
 
 .hidden {
-  display: none !important;
+    display: none !important;
 }
 
 .highlight {
-  border: 2px solid red;
+    border: 2px solid red;
 }
 
 .no-cursor {
-  cursor: none;
+    cursor: none;
 }
 
 /*
   Room ui elements
 */
 #room-ui {
-  position: fixed;
-  top: 12px;
-  right: 12px;
-  z-index: 999999;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-family: Tahoma, sans-serif;
+    position: fixed;
+    top: 12px;
+    right: 12px;
+    z-index: 999999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: Tahoma, sans-serif;
 }
 
 #room-host-badge {
-  background: #22c55e;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 600;
-  padding: 4px 10px;
-  border-radius: 999px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    background: #22c55e;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 999px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 #room-copy-btn {
-  background: #fff;
-  color: #111;
-  border: 1px solid #ddd;
-  border-radius: 999px;
-  padding: 6px 14px;
-  font-size: 13px;
-  cursor: pointer;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+    background: #fff;
+    color: #111;
+    border: 1px solid #ddd;
+    border-radius: 999px;
+    padding: 6px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
 /*
   Cat paw
 */
 #cat-arm-container {
-  overflow: hidden;
-  position: absolute;
-  top:0px;
-  left:0px;
-  right:0px;
-  bottom: 0px;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
 }
 
 #my-arm-wrapper {
-  position: relative;
-  top: 20000px;
-  left: 200px;
-  z-index: 101;
+    position: relative;
+    top: 20000px;
+    left: 200px;
+    z-index: 101;
 
-  user-select: none;
-  -webkit-user-select: none; 
-  pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
 
 }
 
 .cat-arm {
-  overflow: hidden;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  z-index: 101;
+    overflow: hidden;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 101;
 
-  user-select: none;
-  -webkit-user-select: none; 
-  pointer-events: none;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: none;
 
-  -webkitTransform: translate(-75px, -25px); 
-  -mozTransform: translate(-75px, -25px); 
-  -msTransform: translate(-75px, -25px); 
-  -oTransform: translate(-75px, -25px); 
-  transform: translate(-75px, -25px); 
+    -webkitTransform: translate(-75px, -25px);
+    -mozTransform: translate(-75px, -25px);
+    -msTransform: translate(-75px, -25px);
+    -oTransform: translate(-75px, -25px);
+    transform: translate(-75px, -25px);
 }
 
 /*
   Game play css
 */
 .game-object {
-  position: absolute;
-  text-align: center;
-  z-index: 10;
-  user-select: none;
-  -webkit-user-select: none; 
-  pointer-events: auto; 
+    position: absolute;
+    text-align: center;
+    z-index: 10;
+    user-select: none;
+    -webkit-user-select: none;
+    pointer-events: auto;
 }
 
 .card {
-  width: 100px;
-  aspect-ratio: 5/7;  
-  -webkit-transition: transform 0.04s ease-in-out;
-  -moz-transition: transform 0.04s ease-in-out;
-  -o-transition: transform 0.04s ease-in-out;
-  transition: transform 0.04s ease-in-out;
+    width: 100px;
+    aspect-ratio: 5/7;
+    -webkit-transition: transform 0.04s ease-in-out;
+    -moz-transition: transform 0.04s ease-in-out;
+    -o-transition: transform 0.04s ease-in-out;
+    transition: transform 0.04s ease-in-out;
 }
 
 #game-table {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  width: 0px;
-  height: 0px;
-  z-index: 100; 
-  pointer-events: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 0px;
+    height: 0px;
+    z-index: 100;
+    pointer-events: none;
 }
-

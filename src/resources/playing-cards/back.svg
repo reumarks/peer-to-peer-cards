@@ -27,7 +27,7 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.1351284"
      inkscape:cx="182.7987"
-     inkscape:cy="241.38238"
+     inkscape:cy="225.52514"
      inkscape:window-width="1503"
      inkscape:window-height="933"
      inkscape:window-x="0"
@@ -40,16 +40,16 @@
        inkscape:collect="always"
        xlink:href="#tiles-1"
        id="pattern21"
-       patternTransform="matrix(1.5,0,0,1.52,76.218461,373.73705)"
+       patternTransform="matrix(3.24,0,0,3.63,76.218461,373.73705)"
        x="9.30000019"
-       y="-3"
+       y="-17"
        preserveAspectRatio="none" />
     <pattern
        patternUnits="userSpaceOnUse"
        width="15.021545"
        height="25.90893"
        patternTransform="translate(76.218461,373.73705)"
-       style="fill:#920303"
+       style="fill:#8d0303"
        id="tiles-1"
        inkscape:label="Tiles 1"
        inkscape:collect="always"
@@ -106,6 +106,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -123,7 +124,7 @@
        style="display:inline;fill:#ffffff;stroke:#000000;stroke-width:1"
        transform="translate(151.42857,-264.27289)" />
     <rect
-       style="opacity:1;fill:url(#pattern21);stroke:#9c0000;stroke-width:4.087;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:1;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
+       style="opacity:1;fill:url(#pattern21);stroke:#9c0000;stroke-width:10;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:1;stroke-dasharray:none;stroke-opacity:1;paint-order:normal"
        id="rect1"
        width="295.91284"
        height="475.91284"
