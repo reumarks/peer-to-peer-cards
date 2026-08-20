@@ -94,7 +94,7 @@ function updateCatArm() {
 
 function draw() {
     updateCatArm();
-    updateCardsInHand();
+    //updateCardsInHand();
 
 
     refreshInputStates();

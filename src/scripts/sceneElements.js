@@ -22,14 +22,15 @@ export const paw = {
         return this._y;
     },
     
-    _held: null,
-    set held (gameObject) {
+    held: null,
+    
+    pickUp (gameObject) {
         if(gameObject === null){
-            this._held = null;
+            this.held = null;
             return;
         }
 
-        let gameObjectAbsolutePos = gameObject.element.getBoundingClientRect();
+        const gameObjectAbsolutePos = gameObject.element.getBoundingClientRect();
 
         gameObject.x = gameObjectAbsolutePos.left + gameObjectAbsolutePos.width/2 - this.x;
         gameObject.y = gameObjectAbsolutePos.top + gameObjectAbsolutePos.height/2 - this.y;
@@ -37,10 +38,7 @@ export const paw = {
         gameObject.updateDomPosition(1);
 
         this.element.appendChild(gameObject.element);
-        this._held = gameObject;
-    },
-    get held () {
-        return this._held;
+        this.held = gameObject;
     },
 
     set src(newSrc){

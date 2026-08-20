@@ -9,8 +9,6 @@ export const mouse = {
 };
 
 export function setupInputManager(){
-    //mouse.x = window.event.clientX;
-    //mouse.y = window.event.clientY;
     window.onmousemove = (e) => {
         e = e || window.event;
         mouse.x = e.clientX;

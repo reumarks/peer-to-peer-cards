@@ -62,7 +62,7 @@ export class GameObject {
         if(paw.held !== null) return;
         if(!paw.onMouse) return;
 
-        paw.held = this;
+        paw.pickUp(this);
 
         document.onmouseup = (e) => this.mouseUp(e);
     }
