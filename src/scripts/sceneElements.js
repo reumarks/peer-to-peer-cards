@@ -2,6 +2,7 @@ export const paw = {
     element: null,
     imageElement: null,
     onMouse: false,
+    hovering: new Set(),
     
     _x: -200,
     set x(newValue){

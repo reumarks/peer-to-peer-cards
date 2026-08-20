@@ -6,7 +6,7 @@
    width="360"
    height="540"
    id="svg20298"
-   sodipodi:docname="jack-of-diamonds.svg"
+   sodipodi:docname="back.svg"
    inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -27,7 +27,7 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="1.1351284"
      inkscape:cx="182.7987"
-     inkscape:cy="320.66856"
+     inkscape:cy="241.38238"
      inkscape:window-width="1503"
      inkscape:window-height="933"
      inkscape:window-x="0"
@@ -106,7 +106,6 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>

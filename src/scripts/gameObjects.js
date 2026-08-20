@@ -35,6 +35,12 @@ export class GameObject {
         
         if(this.isDraggable){
             this.element.onmousedown = (e) => this.mouseDown(e);
+            this.element.onmouseenter = (e) => {
+                paw.hovering.add(this);
+            }
+            this.element.onmouseleave = (e) => {
+                paw.hovering.delete(this);
+            }
         }
         
         gameTable.element.appendChild(this.element);

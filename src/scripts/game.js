@@ -81,12 +81,14 @@ function updateCatArm(){
     }
   }
 
-  if (mouse.wasPressed) {
+  if (paw.held !== null) {
     paw.src = './resources/cat-arms/orange_closed.svg';
-  } else if (mouse.wasReleased) {
+  } else if (paw.hovering.size > 0) {
     paw.src = './resources/cat-arms/orange_open.svg';
+  } else {
+    paw.src = './resources/cat-arms/orange_default.svg';
   }
-  
+
   showCursor(paw.onMouse);
 }
 
