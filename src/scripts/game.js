@@ -1,7 +1,8 @@
-import { createDeck } from "./cards.js";
 import { mouse, refreshInputStates, setupInputManager } from "./inputManager.js";
-import { convertToPlayerCords, hand, setupSceneElements, showCursor, paw } from "./sceneElements.js";
-import { GameObject } from "./gameObjects.js";
+import { hand, setupSceneElements, showCursor, paw } from "./sceneElements.js";
+import { GameObject } from "./gameObject.js";
+import { Ball } from "./gameObjects/ball.js";
+import { Deck } from "./gameObjects/deck.js";
 
 let room = null;
 
@@ -22,19 +23,8 @@ export async function initGame(currentRoom) {
         }
     });
 
-    createDeck(0, 0);
-
-    const ball = new GameObject(
-        "ball",
-        'ball',
-        `./resources/toys/ball.svg`,
-        200,
-        200,
-        100,
-        100,
-        true
-    );
-
+    new Deck(0, 0);
+    new Ball(200, 200);
     draw();
 }
 
