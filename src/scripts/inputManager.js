@@ -16,7 +16,7 @@ export function setupInputManager(){
         mouse.x = e.clientX;
         mouse.y = e.clientY;
         if(paw.onMouse){
-            if(mouse.y < window.innerHeight/2 - 200 && paw.held === null || mouse.y < window.innerHeight/2) {
+            if(mouse.y < window.innerHeight/3 - 200 && paw.held === null || mouse.y < window.innerHeight/3) {
                 paw.onMouse = false;
             }else{
                 paw.x = mouse.x;

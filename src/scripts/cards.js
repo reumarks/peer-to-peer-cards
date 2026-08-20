@@ -34,16 +34,3 @@ export function createCard(cardName, x, y){
     true
   );
 }
-
-export function moveCard(cardName, x, y){
-  let currentCard = document.getElementById(cardName);
-  if(currentCard === null){
-    console.log(`No card ${cardName} found.`);
-    return;
-  }
-  
-  currentCard.style.left = x + "px";
-  currentCard.style.top = y + "px";
-  currentCard.style.zIndex = boardState.topIndex + 1;
-  boardState.topIndex++;
-}

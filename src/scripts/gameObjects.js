@@ -24,13 +24,13 @@ export class GameObject {
     createDomElement(){
         this.element = document.createElement('img');
         this.element.alt = this.name;
-        this.element.className = this.type;
+        this.element.className = `${this.type} game-object`;
         this.element.src = this.imageSrc;
-        this.element.style.left = this.x + "px";
-        this.element.style.top = this.y + "px";
-        this.element.style.transform = `rotate(${this.r}deg)`
+        this.element.style.left = this.x - this.width/2 + "px";
+        this.element.style.top = this.y - this.height/2 + "px";
         this.element.style.width = this.width + "px";
         this.element.style.height = this.height + "px";
+        this.element.style.transform = `rotate(${this.r}deg)`
         this.element.style.zIndex = this.zIndex;
         
         if(this.isDraggable){

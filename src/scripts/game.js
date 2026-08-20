@@ -1,6 +1,7 @@
-import { createDeck, moveCard } from "./cards.js";
+import { createDeck } from "./cards.js";
 import { mouse, refreshInputStates, setupInputManager } from "./inputManager.js";
 import { convertToPlayerCords, hand, setupSceneElements, showCursor, paw } from "./sceneElements.js";
+import { GameObject } from "./gameObjects.js";
 
 let room = null;
 
@@ -22,12 +23,22 @@ export async function initGame(currentRoom){
   });
 
   createDeck(room, 0, 0);
+
+  const ball = new GameObject(
+    "ball",
+    'ball',
+    `./resources/toys/ball.svg`,
+    200,
+    200,
+    100,
+    100,
+    true
+  );
+
   draw();
 }
 
 function moveCardEvent(cardName, x, y){
-  const cardPosition = convertToPlayerCords(room.playerNumber, parseInt(x), parseInt(y), 0);
-  console.log(`Got global position ${parseInt(x)}, ${parseInt(y)}, converted it to local ${cardPosition.x}, ${cardPosition.y}`)
   moveCard(cardName, cardPosition.x, cardPosition.y);
 }
 
@@ -52,13 +63,13 @@ function updateCardsInHand(){
 
 function updateCatArm(){
   if(!paw.onMouse){
-    if(mouse.y < window.innerHeight/2 - 200 && paw.held === null){
+    if(mouse.y < window.innerHeight/3 - 200 && paw.held === null){
       paw.y = (paw.y * 0.95 + (window.innerHeight - 50) * 0.05);
       paw.x = (paw.x * 0.7 + mouse.x * 0.3);
-    }else if(mouse.y < window.innerHeight/2) {
-      paw.y = (Math.max(paw.y, window.innerHeight/2) * 0.7 + (window.innerHeight / 2) * 0.3);
+    }else if(mouse.y < window.innerHeight/3) {
+      paw.y = (Math.max(paw.y, window.innerHeight/3) * 0.7 + (window.innerHeight/3) * 0.3);
       paw.x = (paw.x * 0.7 + mouse.x * 0.3);
-    }else if(mouse.y > window.innerHeight / 2){
+    }else if(mouse.y > window.innerHeight/3){
       if(Math.abs(mouse.x - paw.x) < 10 && Math.abs(mouse.y - paw.y) < 10){
         paw.onMouse = true;
         paw.y = mouse.y;

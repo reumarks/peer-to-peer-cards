@@ -120,22 +120,22 @@ body {
 /*
   Game play css
 */
-.card {
+.game-object {
   position: absolute;
   text-align: center;
-  width: 100px;
-  aspect-ratio: 5/7;
   z-index: 10;
-  
   user-select: none;
   -webkit-user-select: none; 
-  
+  pointer-events: auto; 
+}
+
+.card {
+  width: 100px;
+  aspect-ratio: 5/7;  
   -webkit-transition: transform 0.04s ease-in-out;
   -moz-transition: transform 0.04s ease-in-out;
   -o-transition: transform 0.04s ease-in-out;
   transition: transform 0.04s ease-in-out;
-
-  pointer-events: auto; 
 }
 
 #game-table {
